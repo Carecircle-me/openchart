@@ -6,7 +6,11 @@ Never add real patient data to this folder or anywhere in this repository.
 
 | File | What it shows |
 |---|---|
-| `directory.json` | Two synthetic dental offices and their endpoints (FHIR `Organization`, `Endpoint`) |
+| `directory.json` | Two synthetic offices (dental, as the first example set) and their endpoints (FHIR `Organization`, `Endpoint`) |
+| `medical-referral.json` | Family doctor → specialist referral (`Task` + `ServiceRequest`) |
+| `pharmacy-medication-list.json` | Pharmacy medication list (`MedicationStatement`s, tagged external-unverified) |
+| `physio-assessment.json` | Physio assessment and plan of care (`Composition` document) |
+| `mental-health-referral-withheld.json` | Counsellor → psychiatrist referral with a patient-directed withheld notice |
 | `holder-chart-office-a.json` | The synthetic chart the holding office has for "Jane Sample", used by the mock hub |
 | `record-request-task.json` | A RecordRequest (`Task`) |
 | `consent.json` | A ConsentGrant (`Consent`) with one item excluded by the patient |

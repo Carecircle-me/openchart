@@ -1,10 +1,10 @@
 # FAQ
 
-Draft 24 Nov 2026. Plain answers for dentists and other clinicians, vendors and patients. OpenChart is not live yet. Answers describe the plan.
+Draft 24 Nov 2026. Plain answers for clinicians in any field, vendors and patients. OpenChart is not live yet. Answers describe the plan.
 
 ---
 
-## For dentists and other providers
+## For clinicians and health offices
 
 **What does it cost my office?**
 The protocol, the spec, the reference code and the sandbox are free and open source. Anyone can implement PDRE without paying anyone. Hosted network operators set their own terms.
@@ -33,8 +33,8 @@ Incoming records sit in a review queue until staff confirm the match. A mistaken
 **Will incoming allergies and medications overwrite my chart?**
 No. They arrive marked "external, needs verification" until a clinician confirms them.
 
-**Does it work with pharmacies and family doctors?**
-That's planned after the dental network works. One patient signature can request your previous dentist's records, the pharmacy's medication list and the family doctor's summary together, which helps before implants or extractions. For physician referrals we plan to work with Ontario's existing eReferral system rather than replace it.
+**Does it work with pharmacies, family doctors and other fields?**
+Yes, by design: it's one protocol for every field of care. One patient signature can request records from several places at once, for example a family doctor's summary, a pharmacy's medication list and a previous dentist's records before surgery. For physician referrals we plan to work with Ontario's existing eReferral system rather than replace it.
 
 **Is patient data stored by CareCircle?**
 Only in transit, encrypted end to end so the hub can't read it, and deleted after delivery plus a short retry window. Audit logs keep metadata, not clinical content. Hosting is in Canada.

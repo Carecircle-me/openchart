@@ -12,7 +12,7 @@ Move a patient's records between any two health offices in a few taps, with the 
 
 ## The problem
 
-When a patient moves, switches dentists or gets referred, their records still travel by phone call, fax, CD, USB stick or a large email. In our experience running a dental office, one transfer costs roughly 20 to 30 minutes of admin on both ends, and the patient's care waits while it happens. Every practice system speaks its own language, so there is no common way to ask for records, prove the patient agreed, and send them.
+When a patient moves, switches clinics or gets referred, their records still travel by phone call, fax, CD, USB stick or a large email. Each transfer takes staff time on both ends, and the patient's care waits while it happens. Every practice system speaks its own language, so there is no common way to ask for records, prove the patient agreed, and send them.
 
 ## What OpenChart does
 
@@ -25,9 +25,9 @@ OpenChart is an open-source project for patient-directed record transfer. Its pr
 
 No broadcast patient search. No automatic release. No permanent central copy of clinical data.
 
-It's designed for dental first, and for any discipline: medical, pharmacy, physio, chiro, optometry and specialists. Cloud, server or Windows desktop systems.
+It's one protocol for every field of care: family practice and specialists, hospitals, pharmacy, dental, physio, chiro, optometry, mental health, labs and imaging, home and long-term care, and the apps that serve them. Cloud, server or Windows desktop systems.
 
-Who benefits and how: **[BENEFITS.md](BENEFITS.md)** (vendors, dental offices, patients).
+Who benefits and how: **[BENEFITS.md](BENEFITS.md)** (vendors, health offices, patients).
 
 ## Quickstart (2 minutes, no install)
 
@@ -54,7 +54,7 @@ npm start       # run the mock hub on http://127.0.0.1:8787
 
 ## Built on open standards
 
-HL7 FHIR R4, CA Core+, the HL7 Dental Data Exchange Implementation Guide, DICOM, and **SMART on FHIR** for vendor app authorisation. FHIR validation is required in conformance testing. Medplum (open source) is a suggested option for a reference FHIR server, self-hosted in Canada for any real data. Planned extensions: insurance eligibility (`Coverage`, `CoverageEligibilityRequest`) and booking (`Appointment`). See [spec/01-protocol.md](spec/01-protocol.md#0-built-on-fhir).
+HL7 FHIR R4, CA Core+, DICOM, **SMART on FHIR** for vendor app authorisation, and field-specific FHIR guides where they exist (for example the HL7 Dental Data Exchange Implementation Guide for dental). FHIR validation is required in conformance testing. Medplum (open source) is a suggested option for a reference FHIR server, self-hosted in Canada for any real data. Planned extensions: insurance eligibility (`Coverage`, `CoverageEligibilityRequest`) and booking (`Appointment`). See [spec/01-protocol.md](spec/01-protocol.md#0-built-on-fhir).
 
 ## Free and open
 
@@ -67,7 +67,7 @@ HL7 FHIR R4, CA Core+, the HL7 Dental Data Exchange Implementation Guide, DICOM,
 ## Status and roadmap
 
 - **Now (v0.1):** draft spec, OpenAPI draft, mock hub with synthetic data.
-- **Next:** feedback from offices and vendors, spec 0.2, conformance test suite, desktop bridge prototype, a pilot with a few Ontario dental offices on synthetic data first.
+- **Next:** feedback from offices and vendors, spec 0.2, conformance test suite, desktop bridge prototype, a pilot with a few Ontario health offices from different fields, on synthetic data first.
 - Real patient data only after independent security testing, privacy assessments and the agreements the law requires. See [spec/04-security-privacy.md](spec/04-security-privacy.md) section 7.
 
 ## Get involved

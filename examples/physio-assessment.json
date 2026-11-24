@@ -1,0 +1,94 @@
+{
+  "resourceType": "Bundle",
+  "id": "ex-physio-assessment",
+  "meta": {
+    "tag": [
+      {
+        "system": "https://example.org/pdre/CodeSystem/data-origin",
+        "code": "synthetic"
+      }
+    ]
+  },
+  "type": "document",
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:comp-physio",
+      "resource": {
+        "resourceType": "Composition",
+        "id": "comp-physio",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://example.org/pdre/CodeSystem/data-origin",
+              "code": "synthetic"
+            }
+          ]
+        },
+        "status": "final",
+        "type": {
+          "text": "Physiotherapy assessment and plan of care"
+        },
+        "subject": {
+          "display": "Alex Sample (SYNTHETIC)"
+        },
+        "date": "2026-11-20",
+        "author": [
+          {
+            "display": "Example Physio Clinic, Hamilton ON (SYNTHETIC)"
+          }
+        ],
+        "title": "Physiotherapy assessment (SYNTHETIC)",
+        "section": [
+          {
+            "title": "Assessment",
+            "text": {
+              "status": "generated",
+              "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Right knee pain after a fall; reduced range of motion (synthetic).</div>"
+            }
+          },
+          {
+            "title": "Outcome measures",
+            "entry": [
+              {
+                "reference": "urn:uuid:obs-rom"
+              }
+            ]
+          },
+          {
+            "title": "Plan of care",
+            "text": {
+              "status": "generated",
+              "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Twice weekly for 6 weeks; home exercise program (synthetic).</div>"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:obs-rom",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "obs-rom",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://example.org/pdre/CodeSystem/data-origin",
+              "code": "synthetic"
+            }
+          ]
+        },
+        "status": "final",
+        "code": {
+          "text": "Right knee flexion range of motion"
+        },
+        "subject": {
+          "display": "Alex Sample (SYNTHETIC)"
+        },
+        "valueQuantity": {
+          "value": 95,
+          "unit": "degrees"
+        }
+      }
+    }
+  ]
+}

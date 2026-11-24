@@ -8,7 +8,7 @@ Draft 24 Nov 2026. **This is not legal advice.** It is a map for a privacy lawye
 
 | Party | Likely role under PHIPA (to confirm) | What it means |
 |---|---|---|
-| Holding provider (dentist, physician, pharmacist, physio, chiro, optometrist) | **Health information custodian** | Decides what to disclose; must follow consent rules, lock-box and access rules; keeps the original record |
+| Holding provider (physician, dentist, pharmacist, physio, chiro, optometrist, psychologist, any regulated professional) | **Health information custodian** | Decides what to disclose; must follow consent rules, lock-box and access rules; keeps the original record |
 | Requesting provider | Custodian (once it receives the record) | Responsible for the copy it imports |
 | Any hub operator (for example CareCircle Link) | **Health information network provider (HINP)** under O. Reg. 329/04 s. 6, and an **electronic service provider** | Must not use or disclose PHI except to provide the service. HINP duties include breach notice to custodians, a plain description of services and safeguards, a public description, an electronic record of all accesses and transfers, threat/risk and privacy impact assessments, and a written agreement with each custodian ([O. Reg. 329/04](https://www.ontario.ca/laws/regulation/040329)) |
 | Patient app | Tool for the individual; operated by CareCircle as the patient's service provider | Patient-facing terms, separate from custodian agreements; no secondary use |

@@ -328,15 +328,14 @@ components:
                   diagnostics: { type: string }
     CreateRequest:
       type: object
-      required: [holderOrg, patient]
+      required: [holderOrg, preset, patient]
       properties:
         holderOrg:
           type: string
           description: Directory id of the holding organisation the patient named
         preset:
           type: string
-          enum: [dental-full, medication-list, imaging-only]
-          default: dental-full
+          enum: [medical-summary, medication-list, imaging-only, dental-full]
         reason: { type: string }
         patient:
           type: object

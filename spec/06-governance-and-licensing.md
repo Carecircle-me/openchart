@@ -56,7 +56,7 @@ Notes:
 
 ### Phase B. Steering committee (after the pilot, 2+ vendors implementing)
 - **PDRE Steering Committee** with a charter: seats for vendors (rotating, with no single company holding a majority), clinicians (by discipline), patient representatives, privacy/security and hub operators. CareCircle holds a seat but **not a veto**.
-- Work groups: Core protocol, Dental, Medical and pharmacy, Allied health (physio, chiro, optometry), Security and trust, Patient experience.
+- Work groups by use case (Core protocol, Referral and consult, Care team, Documents and imaging, Medications, Security and trust, Patient experience), plus field advisory groups that review work for their field (for example medical and hospital, pharmacy, allied health, mental health, dental, community and long-term care).
 - Decisions by lazy consensus, with a two-thirds vote fallback. Meeting notes are public.
 
 ### Phase C. Neutral home (when adoption justifies it)

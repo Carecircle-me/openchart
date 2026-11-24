@@ -21,14 +21,14 @@ An open-source **OpenChart reference patient app** (iOS, Android, and web as a p
 | **Consent inbox** | Every pending request in one place: who is asking, from whom, what (preset in plain words), why, until when, and any fee estimate |
 | **One-tap sign** | Verify (OTP and DOB the first time; passkey or Face ID after binding), review, untick anything, sign. A signed PDF copy is saved. |
 | **Decline or edit** | Decline a request, or narrow it (for example "X-rays only") |
-| **Who has my records** | A list the patient builds and controls: past dentists, family doctor, pharmacy, physio, and so on. It is filled from completed transfers and manual adds. It is **never** built by searching providers. |
+| **Who has my records** | A list the patient builds and controls: family doctor, specialists, pharmacy, physio, dentist, therapist, and so on. It is filled from completed transfers and manual adds. It is **never** built by searching providers. |
 | **Request my own records** | Right-of-access request to any listed provider; the copy arrives encrypted in the app |
 | **Share to a new provider (QR)** | At a new office: tap Share, pick previous provider(s) and a preset, then scan the office's QR code or show the patient's own. This creates a pre-consented request, and the holder still approves. |
 | **Revoke** | Withdraw any active consent with one tap. Pending releases stop, and receivers are notified. |
 | **Activity and audit history** | Timeline of every request, consent, release, delivery and import about them, from the immutable audit |
 | **Receipts** | "Sample Family Dentistry sent 14 items to Example Dental on 24 Nov 2026 at 2:03 PM" |
 | **Family and caregiver delegation** | Parents of minors, substitute decision-makers and caregivers act on someone's behalf with recorded authority. Delegation is time-limited and revocable, and every action is labelled with who acted. |
-| **Multi-provider requests** | One screen to approve dental + pharmacy + family doctor requests together (for example before surgery) |
+| **Multi-provider requests** | One screen to approve requests to several providers together (for example family doctor + pharmacy + dentist before surgery) |
 | **Notifications** | Push, SMS or email, as the patient chooses. Messages never contain clinical details, only "You have a records request from Example Dental." |
 | **Lock-box controls** | Ask a provider to restrict specific information. The app sends the instruction; the provider applies it. |
 | **Data export** | Download their own records (FHIR JSON, PDF, images) to share however they like |

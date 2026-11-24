@@ -1,0 +1,74 @@
+{
+  "resourceType": "Bundle",
+  "id": "ex-mh-referral",
+  "meta": {
+    "tag": [
+      {
+        "system": "https://example.org/pdre/CodeSystem/data-origin",
+        "code": "synthetic"
+      }
+    ]
+  },
+  "type": "document",
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:comp-mh",
+      "resource": {
+        "resourceType": "Composition",
+        "id": "comp-mh",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://example.org/pdre/CodeSystem/data-origin",
+              "code": "synthetic"
+            }
+          ]
+        },
+        "status": "final",
+        "type": {
+          "text": "Referral note"
+        },
+        "subject": {
+          "display": "Alex Sample (SYNTHETIC)"
+        },
+        "date": "2026-11-22",
+        "author": [
+          {
+            "display": "Example Counselling Centre, Ottawa ON (SYNTHETIC)"
+          }
+        ],
+        "title": "Referral to psychiatry (SYNTHETIC)",
+        "section": [
+          {
+            "title": "Reason for referral",
+            "text": {
+              "status": "generated",
+              "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Medication review requested (synthetic).</div>"
+            }
+          },
+          {
+            "title": "Information withheld",
+            "code": {
+              "coding": [
+                {
+                  "system": "https://example.org/pdre/CodeSystem/section",
+                  "code": "withheld"
+                }
+              ]
+            },
+            "text": {
+              "status": "generated",
+              "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Some information has been withheld at the patient's direction.</div>"
+            }
+          }
+        ],
+        "extension": [
+          {
+            "url": "https://example.org/pdre/StructureDefinition/pdre-withheld",
+            "valueBoolean": true
+          }
+        ]
+      }
+    }
+  ]
+}

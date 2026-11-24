@@ -19,7 +19,7 @@ Draft 24 Nov 2026. This doc covers what providers and PMS/EMR vendors get: the i
 ### 1.2 "Approve release" inbox (holding office)
 - A badge in the PMS/EMR toolbar. Each card shows: requester (verified), patient match confidence, consent status and signature evidence, preset, any lock-box flags, and the fee setting.
 - **Preview** shows exactly what will go, with toggles per item.
-- **Release** = one tap by an authorised role (office setting: dentist, manager, privacy lead, or two-person approval for full transfers). **Decline** gives a reason.
+- **Release** = one tap by an authorised role (office setting: clinician, manager, privacy lead, or two-person approval for full transfers). **Decline** gives a reason.
 - After release, the system writes the release log into the chart (date, recipient, items, method) automatically.
 
 ### 1.3 Incoming queue (requesting office)
@@ -49,7 +49,7 @@ Draft 24 Nov 2026. This doc covers what providers and PMS/EMR vendors get: the i
 | SDK | Target | Contents |
 |---|---|---|
 | **TypeScript / JavaScript** (`@pdre/sdk`, placeholder name) | Cloud PMS/EMR, web apps, Node services | FHIR models for PDRE profiles, hub client, JWS/JWE helpers, Task state machine, webhooks, UI web components (`<pdre-request-button>`, `<pdre-release-inbox>`) |
-| **C# / .NET** (`Pdre.Sdk`) | Windows desktop PMSs (many dental and allied systems) | Same core plus Windows Certificate Store / DPAPI key storage, background service template, import-to-folder helpers |
+| **C# / .NET** (`Pdre.Sdk`) | Windows desktop practice systems (many clinic, dental and allied-health systems) | Same core plus Windows Certificate Store / DPAPI key storage, background service template, import-to-folder helpers |
 | **Java / Kotlin** (`org.pdre:sdk`) | Hospital and EMR back ends, Android | Same core, built on the HAPI FHIR models |
 | **Python** (`pdre`) | Scripts, data mapping, test tools, small vendors | Same core, plus mapping toolkit and test harness |
 
@@ -90,7 +90,7 @@ So every office can join on day one, even if its PMS vendor hasn't integrated.
 ---
 
 ## 6. Sandbox
-- A public sandbox hub with **synthetic data only** (Synthea-style generated patients plus hand-built dental, physio and pharmacy fixtures).
+- A public sandbox hub with **synthetic data only** (Synthea-style generated patients plus hand-built fixtures for medical, pharmacy, physio, mental health and dental).
 - Self-serve vendor sign-up, test certificates from a test CA, and test directory entries.
 - Simulated patients: test OTPs, no real SMS or email (the sandbox never sends to real numbers).
 - Scenario runner: happy path, decline, revoke, wrong-patient, partial release with withheld notice, recall, large CBCT, expired consent.

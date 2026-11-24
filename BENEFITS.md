@@ -2,7 +2,7 @@
 
 OpenChart is a free, open-source project for moving patient records, powered by the PDRE (Patient-Directed Record Exchange) protocol. It lets a new office get a patient's records from the previous office in a few taps: the new office requests, the patient signs on their phone, the previous office releases, and the records arrive. Here is what that means for each group.
 
-There are no invented numbers on this page. Where we mention time, it is our founder's own observation as a practising dentist: today a records transfer takes roughly **20 to 30 minutes of admin on both ends** (phone calls, consent forms, scanning, faxing or emailing, chasing). The goal is to bring that down to seconds of staff time. Pilots will measure the real difference.
+There are no invented numbers on this page. Today a records transfer means admin on both ends: phone calls, consent forms, scanning, faxing or emailing, and chasing. The goal is to bring that down to seconds of staff time. Pilots will measure the real difference.
 
 > v0.1 is an experimental draft with a sandbox that uses synthetic data only. Some benefits below depend on features that are planned, not built. See [DISCLAIMER.md](DISCLAIMER.md).
 
@@ -45,15 +45,15 @@ There are no invented numbers on this page. Where we mention time, it is our fou
 
 ---
 
-## For dental offices
+## For health offices (any field)
 
 **Less admin on both ends**
 - Requesting records: pick the previous office from a verified directory and click **Request records**. No phone calls, no faxed consent forms.
 - Sending records: review what will go and tap **Release**. No printing, scanning, burning CDs or emailing large files.
-- In our founder's experience, that's 20 to 30 minutes of admin per transfer today. The aim is seconds of staff time.
+- The aim is seconds of staff time instead of calls, faxes and chasing.
 
 **Records arrive ready to use**
-- Allergies, medications, conditions, treatment history, treatment plans and radiographs arrive in a structured format, into a review queue, not as a pile of PDFs.
+- Allergies, medications, conditions, treatment history, care and treatment plans, images and documents arrive in a structured format, into a review queue, not as a pile of PDFs.
 - Clinical items arrive marked "external, needs verification" until a clinician confirms them, so nothing slips into the chart unchecked.
 
 **You stay in control**
@@ -65,10 +65,10 @@ There are no invented numbers on this page. Where we mention time, it is our fou
 
 **Works with what you have**
 - If your PMS supports the protocol, it's built in. If it's an older desktop system, the planned bridge can connect it. If your software doesn't support it yet, a planned web app lets you send and receive anyway.
-- Works across disciplines too: dental specialists, family doctors, pharmacies, physio, chiro, optometry.
+- One protocol across fields: family doctors, specialists, hospitals, pharmacies, dental, physio, chiro, optometry, mental health and more.
 
 **Better care, faster**
-- New patients can start treatment sooner because history and X-rays arrive before or at the first visit.
+- New patients can start treatment sooner because history, images and test results arrive before or at the first visit.
 - Specialist referrals and consult notes can go back and forth the same way.
 - Designed with privacy in mind: patient-signed consent, encrypted delivery, minimum data and full logging.
 
@@ -77,7 +77,7 @@ There are no invented numbers on this page. Where we mention time, it is our fou
 ## For patients
 
 **Your records follow you**
-- Moving cities, switching dentists or seeing a specialist? Your new office asks, you tap **Sign**, and your records move. No forms to carry, no faxes to chase.
+- Moving cities, switching clinics or seeing a specialist? Your new office asks, you tap **Sign**, and your records move. No forms to carry, no faxes to chase.
 - No app needed: you can sign from a text or email link. A patient app is planned for those who want it.
 
 **Nothing moves without you**
@@ -87,7 +87,7 @@ There are no invented numbers on this page. Where we mention time, it is our fou
 - You can change your mind and withdraw before the records are released.
 
 **Safer care**
-- Your new dentist or doctor sees your allergies, medications and treatment history sooner, so you repeat less and avoid duplicate X-rays where possible.
+- Your new doctor, dentist, pharmacist or therapist sees your allergies, medications and history sooner, so you repeat less and avoid duplicate tests and X-rays where possible.
 - Faster referrals and less waiting for paperwork.
 
 **You can see what happened**

@@ -18,7 +18,7 @@ PDRE is a thin workflow, consent and trust layer on top of HL7® FHIR® R4 (4.0.
 |---|---|---|
 | Data model | HL7 FHIR R4 (`Patient`, `Condition`, `AllergyIntolerance`, `MedicationRequest`/`MedicationStatement`, `Procedure`, `CarePlan`, `DocumentReference`, `ServiceRequest`, `Consent`, `Provenance`, `AuditEvent`, `Task`) | Core |
 | Canadian profiles | CA Core+ (Canada Health Infoway) | Core, where profiles exist |
-| Dental content | HL7 Dental Data Exchange Implementation Guide | Dental profile (`PDRE Dental-CA`) |
+| Field-specific content | Published FHIR guides for a field where they exist (for example the HL7 Dental Data Exchange Implementation Guide for dental) | Optional content packs (for example `PDRE Dental-CA`); more fields to follow |
 | Images | DICOM, referenced from `ImagingStudy` | Core |
 | Vendor app authorisation | **SMART on FHIR**: SMART App Launch for user-facing apps and SMART Backend Services (client credentials with signed JWT) for system-to-system calls | Adopted as the standard authorisation model |
 | Validation | FHIR validator against base R4, CA Core+ and PDRE profiles | **Required** in the conformance test suite |
@@ -37,7 +37,7 @@ Implementing FHIR alone does not give access to any vendor's system, and it does
 
 In scope:
 - Patient-consented transfer of records between two health organisations (custodians), for continuing care, moving, referral, second opinion, pre-procedure checks, or the patient's own copy.
-- Any discipline: dental, medical, pharmacy, physiotherapy, chiropractic, optometry, specialists, allied health.
+- Any field of care: family practice, specialists, hospitals, pharmacy, dental, physiotherapy, chiropractic, optometry, mental health, labs and imaging, home and long-term care, allied health. The protocol is the same for all of them; only the content presets differ.
 - Any system type: cloud, on-premise server, Windows desktop, or no system at all (the web app).
 
 Out of scope for 0.x:
@@ -128,7 +128,7 @@ sequenceDiagram
 
 ### 4.2 One signature, several holders (pre-surgery example)
 
-A dental office planning an implant asks the patient's previous dentist, pharmacy and family doctor at once. The patient signs **one** consent screen that lists three recipients and scopes. Under the hood these are three `Consent` resources, so each can be withdrawn separately. Each holder approves its own release.
+The same pattern works in any field (a surgeon before an operation, a physio before rehab, a long-term care home on admission). Example: a dental office planning an implant asks the patient's previous dentist, pharmacy and family doctor at once. The patient signs **one** consent screen that lists three recipients and scopes. Under the hood these are three `Consent` resources, so each can be withdrawn separately. Each holder approves its own release.
 
 ```mermaid
 sequenceDiagram

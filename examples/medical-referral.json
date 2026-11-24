@@ -1,0 +1,131 @@
+{
+  "resourceType": "Bundle",
+  "id": "ex-medical-referral",
+  "meta": {
+    "tag": [
+      {
+        "system": "https://example.org/pdre/CodeSystem/data-origin",
+        "code": "synthetic"
+      }
+    ]
+  },
+  "type": "collection",
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:sr-1",
+      "resource": {
+        "resourceType": "ServiceRequest",
+        "id": "sr-1",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://example.org/pdre/CodeSystem/data-origin",
+              "code": "synthetic"
+            }
+          ]
+        },
+        "status": "active",
+        "intent": "order",
+        "category": [
+          {
+            "text": "Referral"
+          }
+        ],
+        "code": {
+          "text": "Cardiology consultation"
+        },
+        "subject": {
+          "reference": "#pt",
+          "display": "Alex Sample (SYNTHETIC)"
+        },
+        "requester": {
+          "display": "Example Family Practice, Toronto ON (SYNTHETIC)"
+        },
+        "performer": [
+          {
+            "display": "Example Heart Clinic, Toronto ON (SYNTHETIC)"
+          }
+        ],
+        "reasonCode": [
+          {
+            "text": "Intermittent palpitations; please assess (synthetic)"
+          }
+        ],
+        "supportingInfo": [
+          {
+            "display": "Recent ECG report (synthetic)"
+          },
+          {
+            "display": "Current medication list (synthetic)"
+          }
+        ],
+        "contained": [
+          {
+            "resourceType": "Patient",
+            "id": "pt",
+            "meta": {
+              "tag": [
+                {
+                  "system": "https://example.org/pdre/CodeSystem/data-origin",
+                  "code": "synthetic"
+                }
+              ]
+            },
+            "name": [
+              {
+                "family": "Sample",
+                "given": [
+                  "Alex"
+                ]
+              }
+            ],
+            "birthDate": "1971-06-03"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:task-ref-1",
+      "resource": {
+        "resourceType": "Task",
+        "id": "task-ref-1",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://example.org/pdre/CodeSystem/data-origin",
+              "code": "synthetic"
+            }
+          ],
+          "profile": [
+            "https://example.org/pdre/StructureDefinition/pdre-record-request"
+          ]
+        },
+        "status": "requested",
+        "intent": "order",
+        "code": {
+          "coding": [
+            {
+              "system": "https://example.org/pdre/CodeSystem/task-type",
+              "code": "referral"
+            }
+          ]
+        },
+        "focus": {
+          "reference": "urn:uuid:sr-1"
+        },
+        "requester": {
+          "display": "Example Family Practice (SYNTHETIC)"
+        },
+        "owner": {
+          "display": "Example Heart Clinic (SYNTHETIC)"
+        },
+        "authoredOn": "2026-11-24T10:00:00-05:00",
+        "note": [
+          {
+            "text": "Consult note comes back as a new RecordBundle linked through Task.basedOn."
+          }
+        ]
+      }
+    }
+  ]
+}

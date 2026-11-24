@@ -37,6 +37,12 @@ export const PRESETS: Record<string, Record<string, string>> = {
     'treatment-plan': 'CarePlan',
     imaging: 'ImagingStudy',
   },
+  'medical-summary': {
+    allergies: 'AllergyIntolerance',
+    medications: 'MedicationStatement',
+    conditions: 'Condition',
+    procedures: 'Procedure',
+  },
   'medication-list': { allergies: 'AllergyIntolerance', medications: 'MedicationStatement' },
   'imaging-only': { imaging: 'ImagingStudy' },
 };
@@ -124,7 +130,8 @@ export class MockHub {
     if (input.holderOrg === from) throw new HubError(400, 'cannot request from yourself');
     const p = input.patient;
     if (!p?.family || !p?.given || !/^\d{4}-\d{2}-\d{2}$/.test(p?.birthDate ?? '')) throw new HubError(400, 'patient family, given and birthDate (YYYY-MM-DD) are required');
-    const preset = input.preset ?? 'dental-full';
+    if (!input.preset) throw new HubError(400, `preset is required; use one of ${Object.keys(PRESETS).join(', ')}`);
+    const preset = input.preset;
     if (!PRESETS[preset]) throw new HubError(400, `unknown preset; use one of ${Object.keys(PRESETS).join(', ')}`);
     const id = randomUUID();
     const task = {

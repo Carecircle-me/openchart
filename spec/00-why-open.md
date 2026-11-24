@@ -42,14 +42,14 @@ What we open:
 
 ### Patients
 - **One signature instead of phone calls, forms and pickups.** The patient signs on their phone. They do not carry CDs or chase offices.
-- **Care isn't delayed.** A dentist planning an implant or a surgical extraction can get the medication list and medical history with the same signature, instead of waiting on faxes.
+- **Care isn't delayed.** A surgeon planning an operation, a physio starting a rehab plan or a dentist planning an implant can get the medication list and medical history with the same signature, instead of waiting on faxes.
 - **Fewer repeat X-rays and tests**, because prior imaging arrives at diagnostic quality.
 - **Control and visibility.** Patients see who holds their records, who asked, what was sent and when. They can untick items or withdraw.
 - **Their right of access becomes practical.** Patients can request their own copy into the app.
 - **Free for patients.** The network never charges patients. Any release fee is the office's own legally reasonable fee, shown before signing.
 
-### Providers (dental, medical, pharmacy, physio, chiro, optometry, specialists)
-- **Admin time back.** Requests and releases become a click and a tap. In our founder's experience as a practising dentist, a transfer takes roughly 20 to 30 minutes of admin across both offices today. That is an observation, not a study; pilots will measure it.
+### Providers (any field: family practice, specialists, hospitals, pharmacy, dental, physio, chiro, optometry, mental health, home and long-term care)
+- **Admin time back.** Requests and releases become a click and a tap instead of phone calls, faxes and chasing. Pilots will measure the real difference.
 - **Complete referrals.** Reason, images, alerts and history arrive together, and consult notes come back the same way.
 - **Automatic documentation.** The release log (date, recipient, items, method) is written for College recordkeeping expectations.
 - **Lower risk.** No misdirected faxes or unencrypted USB sticks, verified recipients only, and a full audit trail.

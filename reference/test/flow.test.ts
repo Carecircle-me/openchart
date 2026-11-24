@@ -67,7 +67,7 @@ test('happy path: request -> patient consent -> release -> transfer -> ack -> au
 
 test('wrong DOB or code fails with a generic error', async () => {
   const b = new PdreClient(base, 'office-b-london');
-  const req = await b.requestRecords({ holderOrg: 'office-a-ajax', patient: JANE });
+  const req = await b.requestRecords({ holderOrg: 'office-a-ajax', preset: 'medical-summary', patient: JANE });
   const bad = await new PdreClient(base).consent(req.body.id, { otp: '000000', birthDate: '1990-01-01' });
   assert.equal(bad.status, 403);
   assert.equal(bad.body.issue[0].diagnostics, 'verification failed');
@@ -75,7 +75,7 @@ test('wrong DOB or code fails with a generic error', async () => {
 
 test('unknown patient gives the same generic error (no probing)', async () => {
   const b = new PdreClient(base, 'office-b-london');
-  const req = await b.requestRecords({ holderOrg: 'office-a-ajax', patient: { family: 'Nobody', given: 'No', birthDate: '2000-01-01' } });
+  const req = await b.requestRecords({ holderOrg: 'office-a-ajax', preset: 'medical-summary', patient: { family: 'Nobody', given: 'No', birthDate: '2000-01-01' } });
   assert.equal(req.status, 201);
   const bad = await new PdreClient(base).consent(req.body.id, { otp: '000000', birthDate: '2000-01-01' });
   assert.equal(bad.status, 403);
@@ -86,7 +86,7 @@ test('patient can withdraw consent before release; release then fails', async ()
   const b = new PdreClient(base, 'office-b-london');
   const a = new PdreClient(base, 'office-a-ajax');
   const p = new PdreClient(base);
-  const { body } = await b.requestRecords({ holderOrg: 'office-a-ajax', patient: JANE });
+  const { body } = await b.requestRecords({ holderOrg: 'office-a-ajax', preset: 'medical-summary', patient: JANE });
   await p.consent(body.id, { otp: '000000', birthDate: JANE.birthDate });
   const rv = await p.revoke(body.id, { otp: '000000', birthDate: JANE.birthDate });
   assert.equal(rv.status, 200);
@@ -95,16 +95,16 @@ test('patient can withdraw consent before release; release then fails', async ()
 });
 
 test('auth: missing org, unverified holder, non-party reads', async () => {
-  assert.equal((await new PdreClient(base).requestRecords({ holderOrg: 'office-a-ajax', patient: JANE })).status, 401);
+  assert.equal((await new PdreClient(base).requestRecords({ holderOrg: 'office-a-ajax', preset: 'medical-summary', patient: JANE })).status, 401);
   assert.equal((await new PdreClient(base, 'office-b-london').requestRecords({ holderOrg: 'not-in-directory', patient: JANE })).status, 400);
   const b = new PdreClient(base, 'office-b-london');
-  const { body } = await b.requestRecords({ holderOrg: 'office-a-ajax', patient: JANE });
+  const { body } = await b.requestRecords({ holderOrg: 'office-a-ajax', preset: 'medical-summary', patient: JANE });
   assert.equal((await b.release(body.id, { staff: 'x' })).status, 403, 'requester cannot release');
   assert.equal((await new PdreClient(base, 'office-a-ajax').release(body.id, {})).status, 400, 'release needs a named staff member');
 });
 
 test('holder can decline', async () => {
-  const { body } = await new PdreClient(base, 'office-b-london').requestRecords({ holderOrg: 'office-a-ajax', patient: JANE });
+  const { body } = await new PdreClient(base, 'office-b-london').requestRecords({ holderOrg: 'office-a-ajax', preset: 'medical-summary', patient: JANE });
   const d = await new PdreClient(base, 'office-a-ajax').decline(body.id, 'no-match');
   assert.equal(d.body.status, 'rejected');
 });
