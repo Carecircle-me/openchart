@@ -1,0 +1,14 @@
+{
+  "name": "@openchart/mock-hub",
+  "version": "0.1.0",
+  "description": "OpenChart mock hub (PDRE protocol, Patient-Directed Record Exchange) and tiny TypeScript client. Sandbox only, synthetic data only. Experimental.",
+  "license": "Apache-2.0",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=22.18" },
+  "scripts": {
+    "start": "node src/server.ts",
+    "demo": "node scripts/demo.ts",
+    "test": "node --test \"test/**/*.test.ts\""
+  }
+}

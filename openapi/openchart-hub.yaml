@@ -1,0 +1,380 @@
+openapi: 3.1.0
+info:
+  title: OpenChart Hub API (PDRE protocol, Patient-Directed Record Exchange)
+  version: 0.1.0-draft
+  summary: Draft core endpoints for patient-consented record transfer between health organisations.
+  description: |
+    EXPERIMENTAL DRAFT. Provided AS IS, without warranty of any kind. See DISCLAIMER.md.
+    Not certified, not a medical device, not for use with real patient data in the sandbox.
+
+    Payloads are HL7 FHIR R4 resources (Task, Consent, Bundle, MessageHeader, AuditEvent,
+    Organization, OperationOutcome). Schemas below only describe the PDRE-specific fields;
+    validate full resources with the FHIR validator.
+
+    Production authorisation uses SMART on FHIR Backend Services (client_credentials with a
+    signed JWT, short-lived scoped tokens). The reference mock hub replaces this with the
+    `X-PDRE-Org` header for local sandbox use only.
+  license:
+    name: Apache-2.0
+    identifier: Apache-2.0
+servers:
+  - url: http://127.0.0.1:8787
+    description: Local mock hub (synthetic data only)
+  - url: https://hub.example.org
+    description: Placeholder; no production hub exists
+security:
+  - smartBackend: []
+tags:
+  - name: directory
+  - name: request
+  - name: consent
+  - name: release
+  - name: transfer
+  - name: audit
+paths:
+  /directory/Organization:
+    get:
+      tags: [directory]
+      summary: Look up a verified organisation in the directory
+      description: Directory search by organisation name. There is no patient search anywhere in this API.
+      operationId: searchDirectory
+      security: []
+      parameters:
+        - name: name
+          in: query
+          schema: { type: string }
+      responses:
+        '200':
+          description: FHIR searchset Bundle of Organization resources
+          content:
+            application/fhir+json:
+              schema: { $ref: '#/components/schemas/Bundle' }
+  /requests:
+    post:
+      tags: [request]
+      summary: Create a RecordRequest (requesting office clicks "Request records")
+      operationId: createRequest
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/CreateRequest' }
+      responses:
+        '201':
+          description: Task created with status `requested`. The holder's local patient match is never returned.
+          content:
+            application/fhir+json:
+              schema: { $ref: '#/components/schemas/Task' }
+        '400': { $ref: '#/components/responses/Error' }
+        '401': { $ref: '#/components/responses/Error' }
+  /requests/{id}:
+    parameters:
+      - $ref: '#/components/parameters/RequestId'
+    get:
+      tags: [request]
+      summary: Read a request (parties only)
+      operationId: getRequest
+      responses:
+        '200':
+          description: The Task
+          content:
+            application/fhir+json:
+              schema: { $ref: '#/components/schemas/Task' }
+        '403': { $ref: '#/components/responses/Error' }
+        '404': { $ref: '#/components/responses/Error' }
+  /requests/{id}/consent:
+    parameters:
+      - $ref: '#/components/parameters/RequestId'
+    post:
+      tags: [consent]
+      summary: Patient signs consent (one-time code to the holder's contact on file plus date of birth)
+      operationId: grantConsent
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/ConsentInput' }
+      responses:
+        '201':
+          description: Active FHIR Consent naming recipient, custodian, purpose, period and any denied items
+          content:
+            application/fhir+json:
+              schema: { $ref: '#/components/schemas/Consent' }
+        '403':
+          description: Generic `verification failed` for every failure, so the endpoint cannot be used to probe for patients
+          content:
+            application/fhir+json:
+              schema: { $ref: '#/components/schemas/OperationOutcome' }
+        '409': { $ref: '#/components/responses/Error' }
+  /requests/{id}/revoke:
+    parameters:
+      - $ref: '#/components/parameters/RequestId'
+    post:
+      tags: [consent]
+      summary: Patient withdraws consent before release
+      description: Revocation stops any pending release. It does not reach back to data already delivered.
+      operationId: revokeConsent
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/PatientVerification' }
+      responses:
+        '200':
+          description: Task cancelled
+          content:
+            application/fhir+json:
+              schema: { $ref: '#/components/schemas/Task' }
+        '403': { $ref: '#/components/responses/Error' }
+        '409': { $ref: '#/components/responses/Error' }
+  /requests/{id}/release:
+    parameters:
+      - $ref: '#/components/parameters/RequestId'
+    post:
+      tags: [release]
+      summary: Holding office staff tap "Release" (always a human decision)
+      operationId: releaseRecords
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/ReleaseInput' }
+      responses:
+        '200':
+          description: Task completed; `output` carries the transfer id
+          content:
+            application/fhir+json:
+              schema: { $ref: '#/components/schemas/Task' }
+        '400': { $ref: '#/components/responses/Error' }
+        '403': { $ref: '#/components/responses/Error' }
+        '409':
+          description: No active consent, consent expired, or request not open
+          content:
+            application/fhir+json:
+              schema: { $ref: '#/components/schemas/OperationOutcome' }
+  /requests/{id}/decline:
+    parameters:
+      - $ref: '#/components/parameters/RequestId'
+    post:
+      tags: [release]
+      summary: Holding office declines with a reason
+      operationId: declineRequest
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                reason:
+                  type: string
+                  examples: [no-match, consent-invalid, restricted, other]
+      responses:
+        '200':
+          description: Task rejected
+          content:
+            application/fhir+json:
+              schema: { $ref: '#/components/schemas/Task' }
+  /transfers/{transferId}:
+    parameters:
+      - $ref: '#/components/parameters/TransferId'
+    get:
+      tags: [transfer]
+      summary: Requesting office fetches the RecordBundle (named recipient only)
+      description: In production the payload is end-to-end encrypted to the recipient (JWE). The mock hub returns it in clear for testing.
+      operationId: getTransfer
+      responses:
+        '200':
+          description: FHIR message Bundle (MessageHeader + document Bundle). Includes a withheld notice when the patient excluded items, without saying what.
+          content:
+            application/fhir+json:
+              schema: { $ref: '#/components/schemas/Bundle' }
+        '403': { $ref: '#/components/responses/Error' }
+        '404': { $ref: '#/components/responses/Error' }
+  /transfers/{transferId}/ack:
+    parameters:
+      - $ref: '#/components/parameters/TransferId'
+    post:
+      tags: [transfer]
+      summary: Requesting office acknowledges receipt or import
+      operationId: ackTransfer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [status]
+              properties:
+                status:
+                  type: string
+                  enum: [received, imported, rejected-wrong-patient]
+      responses:
+        '200':
+          description: Ack MessageHeader
+          content:
+            application/fhir+json:
+              schema: { $ref: '#/components/schemas/Resource' }
+  /audit:
+    get:
+      tags: [audit]
+      summary: Read the audit trail for a request (parties only)
+      operationId: getAudit
+      parameters:
+        - name: request
+          in: query
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: FHIR searchset Bundle of AuditEvent resources
+          content:
+            application/fhir+json:
+              schema: { $ref: '#/components/schemas/Bundle' }
+components:
+  securitySchemes:
+    smartBackend:
+      type: oauth2
+      description: SMART on FHIR Backend Services (client_credentials, private_key_jwt). Scopes are illustrative.
+      flows:
+        clientCredentials:
+          tokenUrl: https://hub.example.org/auth/token
+          scopes:
+            system/Task.write: Create and update record requests
+            system/Task.read: Read record requests
+            system/Bundle.read: Fetch transfers addressed to you
+            system/AuditEvent.read: Read audit events for your requests
+    sandboxOrgHeader:
+      type: apiKey
+      in: header
+      name: X-PDRE-Org
+      description: SANDBOX ONLY. Identifies the calling synthetic organisation in the mock hub. Never use in production.
+  parameters:
+    RequestId:
+      name: id
+      in: path
+      required: true
+      schema: { type: string }
+    TransferId:
+      name: transferId
+      in: path
+      required: true
+      schema: { type: string }
+  responses:
+    Error:
+      description: FHIR OperationOutcome
+      content:
+        application/fhir+json:
+          schema: { $ref: '#/components/schemas/OperationOutcome' }
+  schemas:
+    Resource:
+      type: object
+      required: [resourceType]
+      properties:
+        resourceType: { type: string }
+        id: { type: string }
+      additionalProperties: true
+    Bundle:
+      allOf:
+        - $ref: '#/components/schemas/Resource'
+        - type: object
+          properties:
+            resourceType: { const: Bundle }
+            type: { type: string, enum: [searchset, message, document, collection] }
+            total: { type: integer }
+            entry:
+              type: array
+              items:
+                type: object
+                properties:
+                  resource: { $ref: '#/components/schemas/Resource' }
+    Task:
+      allOf:
+        - $ref: '#/components/schemas/Resource'
+        - type: object
+          properties:
+            resourceType: { const: Task }
+            status: { type: string, enum: [requested, accepted, in-progress, completed, rejected, cancelled] }
+            businessStatus:
+              type: object
+              properties:
+                text: { type: string, examples: [awaiting-consent, consented-awaiting-release, released, imported, consent-withdrawn] }
+            requester: { type: object }
+            owner: { type: object }
+            input: { type: array, items: { type: object } }
+            output: { type: array, items: { type: object } }
+    Consent:
+      allOf:
+        - $ref: '#/components/schemas/Resource'
+        - type: object
+          properties:
+            resourceType: { const: Consent }
+            status: { type: string, enum: [active, inactive, rejected] }
+            provision: { type: object }
+    OperationOutcome:
+      allOf:
+        - $ref: '#/components/schemas/Resource'
+        - type: object
+          properties:
+            resourceType: { const: OperationOutcome }
+            issue:
+              type: array
+              items:
+                type: object
+                properties:
+                  severity: { type: string }
+                  code: { type: string }
+                  diagnostics: { type: string }
+    CreateRequest:
+      type: object
+      required: [holderOrg, patient]
+      properties:
+        holderOrg:
+          type: string
+          description: Directory id of the holding organisation the patient named
+        preset:
+          type: string
+          enum: [dental-full, medication-list, imaging-only]
+          default: dental-full
+        reason: { type: string }
+        patient:
+          type: object
+          description: Minimum demographics for the holder's local match
+          required: [family, given, birthDate]
+          properties:
+            family: { type: string }
+            given: { type: string }
+            birthDate: { type: string, format: date }
+    PatientVerification:
+      type: object
+      required: [otp, birthDate]
+      properties:
+        otp:
+          type: string
+          description: One-time code sent to the contact the HOLDER has on file (sandbox uses 000000)
+        birthDate: { type: string, format: date }
+    ConsentInput:
+      allOf:
+        - $ref: '#/components/schemas/PatientVerification'
+        - type: object
+          properties:
+            exclude:
+              type: array
+              description: Preset sections the patient unticks
+              items: { type: string }
+            days:
+              type: integer
+              default: 30
+              minimum: 1
+              maximum: 365
+    ReleaseInput:
+      type: object
+      required: [staff]
+      properties:
+        staff:
+          type: string
+          description: The staff member making the release decision (recorded in Provenance and audit)
+        exclude:
+          type: array
+          items: { type: string }
