@@ -4,9 +4,9 @@
 
 Move a patient's records between any two health offices in a few taps, with the patient's signed consent.
 
-> **Status: v0.1 draft / experimental. Sandbox with synthetic data only.**
+> **Early release (v0.1).** Free to use, provided as is. Anyone using it with real patient data is responsible for their own security and privacy compliance. Not certified and not a medical device.
 >
-> Provided **AS IS, with no warranty and no liability**. Not certified, not a medical device, not legal or clinical advice. Do not use with real patient data. If you implement or deploy it, you are responsible for your own privacy (PHIPA, PIPEDA, HIPAA and others), security and compliance. Read the full [DISCLAIMER.md](DISCLAIMER.md).
+> Provided **AS IS, with no warranty and no liability**. Not legal or clinical advice. If you implement or deploy it, you are responsible for your own privacy (PHIPA, PIPEDA, HIPAA and others), security and compliance. Read the full [DISCLAIMER.md](DISCLAIMER.md).
 
 ---
 
@@ -68,7 +68,7 @@ HL7 FHIR R4, CA Core+, the HL7 Dental Data Exchange Implementation Guide, DICOM,
 
 - **Now (v0.1):** draft spec, OpenAPI draft, mock hub with synthetic data.
 - **Next:** feedback from offices and vendors, spec 0.2, conformance test suite, desktop bridge prototype, a pilot with a few Ontario dental offices on synthetic data first.
-- Real patient data only after independent security testing, privacy assessments and the agreements the law requires. See [spec/04-security-privacy.md](spec/04-security-privacy.md) section 7.
+- Early release (v0.1). Anyone using it with real patient data is responsible for their own security and privacy compliance, including the testing, privacy assessments and agreements the law requires. See [spec/04-security-privacy.md](spec/04-security-privacy.md) section 7.
 
 ## Get involved
 
