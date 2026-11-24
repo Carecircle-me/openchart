@@ -2,9 +2,11 @@
 
 **Please read this before using anything in this repository.**
 
-## Experimental software and draft specification
+## Early release (v0.1)
 
-OpenChart, including the PDRE (Patient-Directed Record Exchange) protocol specification, the reference code, the OpenAPI description, the examples and all documentation in this repository (together, the "Materials") are an **experimental v0.1 draft**. They are incomplete, untested in real clinical settings, and may contain bugs, security vulnerabilities, errors and omissions. They can change at any time without notice.
+**Early release (v0.1). Free to use, provided as is. Anyone using it with real patient data is responsible for their own security and privacy compliance. Not certified and not a medical device.**
+
+OpenChart, including the PDRE (Patient-Directed Record Exchange) protocol specification, the reference code, the OpenAPI description, the examples and all documentation in this repository (together, the "Materials") are an early release (v0.1). They are incomplete, untested in real clinical settings, and may contain bugs, security vulnerabilities, errors and omissions. They can change at any time without notice.
 
 ## Provided "AS IS", with no warranty
 
