@@ -1,0 +1,135 @@
+{
+  "resourceType": "Bundle",
+  "type": "searchset",
+  "meta": {
+    "tag": [
+      {
+        "system": "https://example.org/pdre/CodeSystem/data-origin",
+        "code": "synthetic",
+        "display": "Synthetic test data - not a real person"
+      }
+    ]
+  },
+  "entry": [
+    {
+      "resource": {
+        "resourceType": "Organization",
+        "id": "office-a-ajax",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://example.org/pdre/CodeSystem/data-origin",
+              "code": "synthetic",
+              "display": "Synthetic test data - not a real person"
+            }
+          ]
+        },
+        "active": true,
+        "name": "Sample Family Dentistry (SYNTHETIC)",
+        "type": [
+          {
+            "text": "Dental clinic"
+          }
+        ],
+        "address": [
+          {
+            "city": "Ajax",
+            "state": "ON",
+            "country": "CA"
+          }
+        ],
+        "endpoint": [
+          {
+            "reference": "Endpoint/ep-office-a"
+          }
+        ]
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Organization",
+        "id": "office-b-london",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://example.org/pdre/CodeSystem/data-origin",
+              "code": "synthetic",
+              "display": "Synthetic test data - not a real person"
+            }
+          ]
+        },
+        "active": true,
+        "name": "Example Dental London (SYNTHETIC)",
+        "type": [
+          {
+            "text": "Dental clinic"
+          }
+        ],
+        "address": [
+          {
+            "city": "London",
+            "state": "ON",
+            "country": "CA"
+          }
+        ],
+        "endpoint": [
+          {
+            "reference": "Endpoint/ep-office-b"
+          }
+        ]
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Endpoint",
+        "id": "ep-office-a",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://example.org/pdre/CodeSystem/data-origin",
+              "code": "synthetic",
+              "display": "Synthetic test data - not a real person"
+            }
+          ]
+        },
+        "status": "active",
+        "connectionType": {
+          "system": "http://terminology.hl7.org/CodeSystem/endpoint-connection-type",
+          "code": "hl7-fhir-rest"
+        },
+        "payloadType": [
+          {
+            "text": "PDRE RecordBundle"
+          }
+        ],
+        "address": "https://hub.example.org/org/office-a-ajax"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Endpoint",
+        "id": "ep-office-b",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://example.org/pdre/CodeSystem/data-origin",
+              "code": "synthetic",
+              "display": "Synthetic test data - not a real person"
+            }
+          ]
+        },
+        "status": "active",
+        "connectionType": {
+          "system": "http://terminology.hl7.org/CodeSystem/endpoint-connection-type",
+          "code": "hl7-fhir-rest"
+        },
+        "payloadType": [
+          {
+            "text": "PDRE RecordBundle"
+          }
+        ],
+        "address": "https://hub.example.org/org/office-b-london"
+      }
+    }
+  ]
+}
