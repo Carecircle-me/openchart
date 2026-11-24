@@ -1,0 +1,41 @@
+{
+  "resourceType": "AuditEvent",
+  "id": "ae-example",
+  "meta": {
+    "tag": [
+      {
+        "system": "https://example.org/pdre/CodeSystem/data-origin",
+        "code": "synthetic",
+        "display": "Synthetic test data - not a real person"
+      }
+    ]
+  },
+  "type": {
+    "system": "http://dicom.nema.org/resources/ontology/DCM",
+    "code": "110106",
+    "display": "Export"
+  },
+  "action": "E",
+  "recorded": "2026-11-24T14:03:10-05:00",
+  "outcome": "0",
+  "agent": [
+    {
+      "who": {
+        "reference": "Organization/office-a-ajax"
+      },
+      "requestor": true
+    }
+  ],
+  "source": {
+    "observer": {
+      "display": "PDRE sandbox hub"
+    }
+  },
+  "entity": [
+    {
+      "what": {
+        "reference": "Task/req-example"
+      }
+    }
+  ]
+}

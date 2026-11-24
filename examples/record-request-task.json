@@ -1,0 +1,59 @@
+{
+  "resourceType": "Task",
+  "id": "req-example",
+  "meta": {
+    "tag": [
+      {
+        "system": "https://example.org/pdre/CodeSystem/data-origin",
+        "code": "synthetic",
+        "display": "Synthetic test data - not a real person"
+      }
+    ]
+  },
+  "status": "requested",
+  "intent": "order",
+  "code": {
+    "coding": [
+      {
+        "system": "https://example.org/pdre/CodeSystem/message",
+        "code": "record-request"
+      }
+    ]
+  },
+  "authoredOn": "2026-11-24T10:15:00-05:00",
+  "requester": {
+    "reference": "Organization/office-b-london"
+  },
+  "owner": {
+    "reference": "Organization/office-a-ajax"
+  },
+  "reasonCode": {
+    "text": "Continuing care - patient moved"
+  },
+  "input": [
+    {
+      "type": {
+        "text": "preset"
+      },
+      "valueCode": "dental-full"
+    },
+    {
+      "type": {
+        "text": "patient-family"
+      },
+      "valueString": "Sample"
+    },
+    {
+      "type": {
+        "text": "patient-given"
+      },
+      "valueString": "Jane"
+    },
+    {
+      "type": {
+        "text": "patient-birthDate"
+      },
+      "valueDate": "1985-04-12"
+    }
+  ]
+}
