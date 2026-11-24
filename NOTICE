@@ -1,0 +1,10 @@
+OpenChart (PDRE protocol: Patient-Directed Record Exchange) specification and reference code
+Copyright 2026 CareCircle Connect Inc.
+
+This product includes software developed by CareCircle Connect Inc. and contributors,
+licensed under the Apache License, Version 2.0 (see LICENSE).
+Specification text is licensed under CC BY 4.0 (see LICENSE-SPEC).
+Examples are dedicated to the public domain under CC0 1.0.
+
+HL7(R), FHIR(R) and the FHIR(R) [FLAME DESIGN] are the registered trademarks of
+Health Level Seven International. Their use does not constitute endorsement by HL7.
